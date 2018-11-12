@@ -1,0 +1,7 @@
+#+TITLE: Timing Results
+#+SUBTITLE: CS392 Systems Programming: Assignment 4
+#+AUTHOR: Mijeong Ban
+#+DATE: November 11, 2018
+#+STARTUP: showall
+#+OPTIONS: num:nil toc:nil
+#+LaTex_HEADER: \usepackage[1.0in]{geometry}
