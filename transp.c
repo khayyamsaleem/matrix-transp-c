@@ -2,6 +2,18 @@
 #include <stdlib.h>
 #include <time.h>
 
+float * creating_matrix (float * matrix, int matrix_width) {
+  int i, j = 0;
+  srand(time(NULL));
+  for(i = 0; i < matrix_width; i++){
+    for(j = 0; j < matrix_width; j++){
+      // matrix[i*matrix_width + j] = ((float)rand() / (float)RAND_MAX * 100)+10;
+      matrix[i*matrix_width + j] = ((float)rand() / (float)RAND_MAX * 100.0f);
+    }
+  }
+  return matrix;
+}
+
 int main(int argc, char **argv) {
 
   int matrix_width = atoi(argv[1]);
@@ -23,17 +35,13 @@ int main(int argc, char **argv) {
     return -1;
   }
 
+  /* Dynamically allocating memory spaces for input matrix */
   float * matrix = (float *)malloc(sizeof(float) * matrix_width * matrix_width);
 
-  int i, j = 0;
-  srand(time(NULL));
-  for(i = 0; i < matrix_width; i++){
-    for(j = 0; j < matrix_width; j++){
-      // matrix[i*matrix_width + j] = ((float)rand() / (float)RAND_MAX * 100)+10;
-      matrix[i*matrix_width + j] = ((float)rand() / (float)RAND_MAX * 100.0f);
-    }
-  }
+  /* creating matrix array with random numbers */
+  matrix = creating_matrix(matrix, matrix_width);
 
+  int i, j = 0;
   printf("*********input matrix*********\n");
   for (i = 0; i < matrix_width; i++) {
     for(j = 0; j < matrix_width; j++) {
