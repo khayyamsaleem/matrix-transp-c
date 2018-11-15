@@ -31,7 +31,7 @@ int * disply_matrix (float * matrix, int matrix_width) {
 float * transposition (float * matrix, float * output_matrix, int matrix_width, int block_width) {
   int i, j = 0;
   for(int i = 0; i < matrix_width; i += block_width) {
-    for(int j = 0; j < matrix_width; j+= block_width) {
+    for(int j = 0; j < matrix_width; j += block_width) {
       for(int k = i; k < i + block_width; ++k) {
         for(int l = j; l < j + block_width; ++l) {
           output_matrix[k + l*matrix_width] = matrix[l + k*matrix_width];

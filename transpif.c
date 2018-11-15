@@ -37,8 +37,8 @@ int main(int argc, char **argv) {
     }
   }
 
-  for (i = 0; i < matrix_width; i++) {
-    for(j = 0; j < matrix_height; j++) {
+  for (i = 0; i < matrix_height; i++) {
+    for(j = 0; j < matrix_width; j++) {
       printf("%*.*f | ", 5, 2, matrix[i * matrix_width + j]);
     }
     printf("\n");
@@ -47,24 +47,7 @@ int main(int argc, char **argv) {
 
   float * output_matrix = (float *)malloc(sizeof(float) * matrix_height * matrix_width);
 
-  // for(i = 0; i < matrix_height; i += block_width) {
-  //   for(j = 0; j < matrix_width; j+= block_width) {
-  //     // if((i+block <= height) && (j + block <= width)) {}
-  //     for(int k = i; k < i + block_width; ++k) {
-  //       for(int l = j; l < j + block_width; ++l) {
-  //         output_matrix[k + l*matrix_height] = matrix[l + k*matrix_width];
-  //       }
-  //     }/* else {
-  //       for(int k = i; k < height; ++k) {
-  //        for (int l = j; l < width; ++l) {
-  //        output_matrix[k + l*matrix_height] = matrix[l + k*matrix_width];
-  //      }
-  //     }
-  //     */
-  //     }
-  //   }
-  // }
-
+  // with if statement
   for(i = 0; i < matrix_height; i += block_width) {
     for(j = 0; j < matrix_width; j += block_width) {
       if ((i + block_width <= matrix_height) && (j + block_width <= matrix_width)) {
@@ -83,9 +66,9 @@ int main(int argc, char **argv) {
     }
   }
 
-  for (i = 0; i < matrix_height; i++) {
-    for(j = 0; j < matrix_width; j++) {
-      printf("%*.*f | ", 5, 2, matrix[i * matrix_width + j]);
+  for (i = 0; i < matrix_width; i++) {
+    for(j = i*matrix_height; j < (i*matrix_height) + matrix_height; j++) {
+      printf("%5.2f | ", output_matrix[j]);
     }
     printf("\n");
   }
@@ -96,11 +79,3 @@ int main(int argc, char **argv) {
 
   return 0;
 }
-
-/*
-1. matrices = not really a power of 2
-2. block size = a power of 2
-3. three arguments: the height, width, bloci_width(power of 2)
-4. Use if statements to verify that all memory accesses are legal.
-5. Accessing the 500th element of a raw with 499 elements is wrong, even though it still falls within the memory allocated for the matrix.
-*/
