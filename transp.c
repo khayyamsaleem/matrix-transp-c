@@ -8,7 +8,6 @@ float * creating_matrix (float * matrix, int matrix_width) {
   srand(time(NULL));
   for(i = 0; i < matrix_width; i++){
     for(j = 0; j < matrix_width; j++){
-      // matrix[i*matrix_width + j] = ((float)rand() / (float)RAND_MAX * 100)+10;
       matrix[i*matrix_width + j] = ((float)rand() / (float)RAND_MAX * 100.0f);
     }
   }
@@ -16,7 +15,7 @@ float * creating_matrix (float * matrix, int matrix_width) {
 }
 
 /* function for displaying matrices */
-int * disply_matrix (float * matrix, int matrix_width) {
+int display_matrix (float * matrix, int matrix_width) {
   for (int i = 0; i < matrix_width; i++) {
     for(int j = 0; j < matrix_width; j++) {
       printf("%*.*f | ", 5, 2, matrix[i * matrix_width + j]);
@@ -30,8 +29,8 @@ int * disply_matrix (float * matrix, int matrix_width) {
 /* function to transpose a matrix */
 float * transposition (float * matrix, float * output_matrix, int matrix_width, int block_width) {
   int i, j = 0;
-  for(int i = 0; i < matrix_width; i += block_width) {
-    for(int j = 0; j < matrix_width; j += block_width) {
+  for(i = 0; i < matrix_width; i += block_width) {
+    for(j = 0; j < matrix_width; j += block_width) {
       for(int k = i; k < i + block_width; ++k) {
         for(int l = j; l < j + block_width; ++l) {
           output_matrix[k + l*matrix_width] = matrix[l + k*matrix_width];
@@ -74,7 +73,7 @@ int main(int argc, char **argv) {
 
   /* print out the original matrix */
   printf("*********input matrix*********\n");
-  disply_matrix(matrix, matrix_width);
+  display_matrix(matrix, matrix_width);
 
   /* Dynamically allocating memory spaces for the transposed matrix */
   float * output_matrix = (float *)malloc(sizeof(float) * matrix_width * matrix_width);
@@ -84,7 +83,7 @@ int main(int argc, char **argv) {
 
   /* print out the transposed matrix */
   printf("*********transposed matrix*********\n");
-  disply_matrix(output_matrix, matrix_width);
+  display_matrix(output_matrix, matrix_width);
 
   /* free memories */
   free(matrix);
