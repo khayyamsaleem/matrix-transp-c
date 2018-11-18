@@ -38,11 +38,12 @@ float * transposition (float * matrix, float * output_matrix, int matrix_width, 
     for(j = 0; j < matrix_width; j += block_width) {
       for(int k = i; k < i + block_width; ++k) {
         for(int l = j; l < j + block_width; ++l) {
-          output_matrix[k + l*matrix_width] = matrix[l + k*matrix_width]; //8192 2 - 0.84s 4 - 0.73s
-          //output_matrix[l*matrix_width + k] = matrix[l + k*matrix_width]; //8192 2 - 0.83s 4 - 0.71s
-          //output_matrix[l*matrix_width + k] = matrix[k*matrix_width + l]; //8192 2 - 0.84s
-          //output_matrix[matrix_width*l + k] = matrix[matrix_width*k + l]; //8192 2 - 0.84s
-          //output_matrix[k + matrix_width*l] = matrix[l + matrix_width*k]; //8192 2 - 0.87s
+          //output_matrix[k + l*matrix_width] = matrix[l + k*matrix_width]; //0.083471s
+          output_matrix[k + l*matrix_width] = matrix[k*matrix_width + l]; //0.065188
+          //output_matrix[l*matrix_width + k] = matrix[l + k*matrix_width]; //0.082975s
+          //output_matrix[l*matrix_width + k] = matrix[k*matrix_width + l]; //0.080931s
+          //output_matrix[matrix_width*l + k] = matrix[matrix_width*k + l]; //0.077316s
+          //output_matrix[k + matrix_width*l] = matrix[l + matrix_width*k]; //0.078903s
         }
       }
     }
@@ -99,11 +100,8 @@ int main(int argc, char **argv) {
   printf("TRANSPOSED MATRIX:\n");
   //display_matrix(output_matrix, matrix_width);
 
-  //printf("Total time = %f\n", (double)(tv2.tv_usec - tv1.tv_usec)/1000000 + (double)(tv2.tv_usec - tv1.tv_usec));
-  /* In second */
-  printf("Total time = %ld seconds\n", (tv2.tv_sec - tv1.tv_sec));
-  /* In microsecond */
-  printf("Total time = %f microseconds\n", (double)(tv2.tv_usec - tv1.tv_usec)/1000000 + (double)(tv2.tv_sec - tv1.tv_sec));
+  /* In seconds */
+  printf("Total time = %f seconds\n", (double)(tv2.tv_usec - tv1.tv_usec)/1000000 + (double)(tv2.tv_sec - tv1.tv_sec));
 
   /* free memories */
   free(matrix);
