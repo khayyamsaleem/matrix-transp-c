@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#include <sys/time.h>
 
 /* function to create an array for the matrix with random numbers */
 float * creating_matrix (float * matrix, int matrix_width, int matrix_height) {
@@ -38,7 +39,7 @@ float * transposition (float * matrix, float * output_matrix, int matrix_width, 
 
 int main(int argc, char **argv) {
 
-
+  //struct timeval tv1, tv2;
 
   int matrix_height = atoi(argv[1]);
   int matrix_width = atoi(argv[2]);
@@ -46,7 +47,7 @@ int main(int argc, char **argv) {
 
   /* checking the number of arguments */
   if (argc != 4) {
-    fprintf(stderr, "Wrong number of command-line arguments. \n Usage: ./transpif.c <arg1> <arg2>\n");
+    fprintf(stderr, "Wrong number of command-line arguments. \n Usage: ./transpif.c <matrix_width> <matrix_height> <block size>\n");
     return -1;
   }
 
@@ -81,8 +82,12 @@ int main(int argc, char **argv) {
   /* Dynamically allopcating memory spaces for the transposed matrix */
   float * output_matrix = (float *)malloc(sizeof(float) * matrix_height * matrix_width);
 
+  //gettimeofday(&tv1, NULL);
+
   /* transposition of the matrix */
   output_matrix = transposition(matrix, output_matrix, matrix_width, matrix_height, block_width);
+
+  //gettimeofday(&tv2, NULL);
 
   /* print out the transposed matrix */
   printf("TRANSPOSED MATRIX\n");
@@ -93,6 +98,9 @@ int main(int argc, char **argv) {
     printf("\n");
   }
   printf("\n");
+
+  /* In seconds */
+  //printf("Total time = %f seconds\n", (double)(tv2.tv_usec - tv1.tv_usec)/1000000 + (double)(tv2.tv_sec - tv1.tv_sec));
 
   /* free memories */
   free(matrix);

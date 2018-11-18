@@ -53,7 +53,7 @@ float * transposition (float * matrix, float * output_matrix, int matrix_width, 
 
 int main(int argc, char **argv) {
 
-  struct timeval tv1, tv2;
+  // struct timeval tv1, tv2;
 
   int matrix_width = atoi(argv[1]);
   int block_width = atoi(argv[2]);
@@ -85,23 +85,23 @@ int main(int argc, char **argv) {
 
   /* print out the original matrix */
   printf("INPUT MATRIX:\n");
-  //display_matrix(matrix, matrix_width);
+  display_matrix(matrix, matrix_width);
 
   /* Dynamically allocating memory spaces for the transposed matrix */
   float * output_matrix = (float *)malloc(sizeof(float) * matrix_width * matrix_width);
 
-  gettimeofday(&tv1, NULL);
+  // gettimeofday(&tv1, NULL);
 
   /* transposition of the matrix */
   output_matrix = transposition(matrix, output_matrix, matrix_width, block_width);
 
-  gettimeofday(&tv2, NULL);
+  // gettimeofday(&tv2, NULL);
   /* print out the transposed matrix */
   printf("TRANSPOSED MATRIX:\n");
-  //display_matrix(output_matrix, matrix_width);
+  display_matrix(output_matrix, matrix_width);
 
   /* In seconds */
-  printf("Total time = %f seconds\n", (double)(tv2.tv_usec - tv1.tv_usec)/1000000 + (double)(tv2.tv_sec - tv1.tv_sec));
+  //printf("Total time = %f seconds\n", (double)(tv2.tv_usec - tv1.tv_usec)/1000000 + (double)(tv2.tv_sec - tv1.tv_sec));
 
   /* free memories */
   free(matrix);
