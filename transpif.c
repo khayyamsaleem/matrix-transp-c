@@ -14,6 +14,7 @@ float * creating_matrix (float * matrix, int matrix_width, int matrix_height) {
   return matrix;
 }
 
+/* function for displaying matrices */
 float * transposition (float * matrix, float * output_matrix, int matrix_width, int matrix_height, int block_width) {
   for(int i = 0; i < matrix_height; i += block_width) {
     for(int j = 0; j < matrix_width; j += block_width) {
@@ -36,6 +37,8 @@ float * transposition (float * matrix, float * output_matrix, int matrix_width, 
 }
 
 int main(int argc, char **argv) {
+
+
 
   int matrix_height = atoi(argv[1]);
   int matrix_width = atoi(argv[2]);
@@ -66,10 +69,10 @@ int main(int argc, char **argv) {
   matrix = creating_matrix(matrix, matrix_width, matrix_height);
 
   /* print out the original matrix */
-  printf("*********input matrix*********\n");
+  printf("INPUT MATRIX:\n");
   for(int i = 0; i < matrix_height; i++) {
     for(int j = 0; j < matrix_width; j++) {
-      printf("%*.*f | ", 5, 2, matrix[i * matrix_width + j]);
+      printf("%5.2f | ", matrix[i * matrix_width + j]);
     }
     printf("\n");
   }
@@ -82,7 +85,7 @@ int main(int argc, char **argv) {
   output_matrix = transposition(matrix, output_matrix, matrix_width, matrix_height, block_width);
 
   /* print out the transposed matrix */
-  printf("*********transposed matrix*********\n");
+  printf("TRANSPOSED MATRIX\n");
   for(int i = 0; i < matrix_width; i++) {
     for(int j = i*matrix_height; j < (i*matrix_height) + matrix_height; j++) {
       printf("%5.2f | ", output_matrix[j]);
@@ -91,6 +94,7 @@ int main(int argc, char **argv) {
   }
   printf("\n");
 
+  /* free memories */
   free(matrix);
   free(output_matrix);
 
