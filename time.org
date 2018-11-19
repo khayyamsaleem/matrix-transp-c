@@ -1,7 +1,45 @@
 #+TITLE: Timing Results
 #+SUBTITLE: CS392 Systems Programming: Assignment 4
 #+AUTHOR: Mijeong Ban
-#+DATE: November 11, 2018
+#+DATE: November 18, 2018
 #+STARTUP: showall
 #+OPTIONS: num:nil toc:nil
 #+LaTex_HEADER: \usepackage[1.0in]{geometry}
+/I pledged my honor that I have abided by the Stevens Honor System./
+
+** Problem 1. Simple Matrix Transposition (transp.c)
+- The time of transposition using (~gettimeofday()~)
+ | block size | 2048 x 2048 matrix | 4096 x 4096 matrix | 8192 x 8192 matrix |
+ |------------+--------------------+--------------------+--------------------|
+ |          1 |           0.065188 |           0.241805 |           0.896102 |
+ |          2 |           0.042551 |           0.156350 |           0.550348 |
+ |          4 |           0.101845 |           0.101845 |           0.386316 |
+ |        /8/ |         /0.030315/ |         /0.096471/ |         /0.348540/ |
+ |         16 |           0.059982 |           0.186385 |           0.701284 |
+ |         32 |           0.062829 |           0.187096 |           0.730646 |
+- The best block width: 
+ + 2048 x 2048: block size - 8
+ + 4096 x 4096: block size - 8
+ + 8192 x 8192: block size - 8
+ + The block width 8 for all each size of the input matrix had the shortest execution time for the transposition.
+
+** Problem 2. Arbitrary Matrix Transposition (transpif.c)
+- The time of transposition (using ~gettimeofday()~)
+| block size | 2048 x 2048 matrix | 4096 x 4096 matrix | 8192 x 8192 matrix |
+|------------+--------------------+--------------------+--------------------|
+|          1 |           0.065345 |           0.222461 |           0.806687 |
+|          2 |           0.040364 |           0.140066 |           0.490627 |
+|          4 |           0.028005 |           0.086787 |           0.352601 |
+|        /8/ |         /0.021726/ |         /0.070892/ |         /0.333350/ |
+|         16 |           0.052160 |           0.193937 |           0.670901 |
+|         32 |           0.053307 |           0.190148 |           0.692678 |
+- The best block width:
+ + 2048 x 2048: block size - 8
+ + 4096 x 4096: block size - 8
+ + 8192 x 8192: block size - 8
+ + The block width 8 for all each size of the input matrix had the shortest execution time for the transposition. 
+*** How does the code become faster due to cache hits?
+The transposition function for these programs takes a cache-oblivious algorithm where the provlem is devided into smaller smaller subproblems. Instead of transposing one by one, we can transpose the matrix by dividing the matrix in smaller blocks and transposing each into their correct position in the transposed matrix. Once we get a block size that fits into cache, we can reduce the possibility of a cache miss. Therefore, the performance and speed of the program will be much better since we can reduce cache misses by using the smaller array sizes(the block). 
+
+** Problem 3. Branch and Merge on GitHub
+- The commits page of the repo: https://github.com/halfundecided/matrix-transp-c/commits/master

@@ -1,3 +1,5 @@
+/* Mijeong Ban */
+/* I pledge my honor that I have abided by the Stevens Honor System. */
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
@@ -96,6 +98,7 @@ int main(int argc, char **argv) {
   output_matrix = transposition(matrix, output_matrix, matrix_width, block_width);
 
   // gettimeofday(&tv2, NULL);
+  
   /* print out the transposed matrix */
   printf("TRANSPOSED MATRIX:\n");
   display_matrix(output_matrix, matrix_width);

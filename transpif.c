@@ -1,3 +1,5 @@
+/* Mijeong Ban */
+/* I pledge my honor that I have abided by the Stevens Honor System. */
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
@@ -22,13 +24,13 @@ float * transposition (float * matrix, float * output_matrix, int matrix_width, 
       if ((i + block_width <= matrix_height) && (j + block_width <= matrix_width)) {
         for(int k = i; k < i + block_width; ++k) {
           for(int l = j; l < j + block_width; ++l) {
-            output_matrix[k + l*matrix_height] = matrix[l + k*matrix_width];
+            output_matrix[k + l*matrix_height] = matrix[k*matrix_width + l];
           }
         }
       } else {
         for(int k = i; k < matrix_height; ++k) {
           for(int l = j; l < matrix_width; ++l) {
-            output_matrix[k + l*matrix_height] = matrix[l + k*matrix_width];
+            output_matrix[k + l*matrix_height] = matrix[k*matrix_width + l];
           }
         }
       }
