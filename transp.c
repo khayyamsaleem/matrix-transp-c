@@ -62,7 +62,7 @@ int main(int argc, char **argv) {
 
   /* checking the number of arguments */
   if (argc != 3) {
-    fprintf(stderr, "Wrong number of command-line arguments. \n Usage: ./transp.c <matrix size> <block size>\n");
+    fprintf(stderr, "Wrong number of command-line arguments.\nUsage: ./transp.c <matrix size> <block size>\n");
     return -1;
   }
 
